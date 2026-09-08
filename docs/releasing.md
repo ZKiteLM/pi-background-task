@@ -93,7 +93,7 @@ After the package exists on npm, configure an npm Trusted Publisher for:
 - workflow filename: `publish.yml`
 - allowed action: direct `npm publish`
 
-The included workflow uses GitHub-hosted Node.js 24, npm 11.5.1+, and OIDC (`id-token: write`). It needs no long-lived npm write token. Publishing a GitHub Release runs the checks and publishes the version already declared in `package.json`; the git tag should therefore match, for example `v0.1.0`.
+The included workflow uses GitHub-hosted Node.js 24, npm 11.5.1+, and OIDC (`id-token: write`). It needs no long-lived npm write token. Publishing a GitHub Release runs the checks and publishes the version already declared in `package.json`; if that exact version already exists, the publish step is skipped safely. The git tag should match, for example `v0.1.0`.
 
 See npm's [Trusted publishing documentation](https://docs.npmjs.com/trusted-publishers/).
 

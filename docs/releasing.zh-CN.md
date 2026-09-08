@@ -70,7 +70,7 @@ npm publish --access public
 - workflow filename：`publish.yml`
 - allowed action：直接 `npm publish`
 
-仓库内的 workflow 使用 GitHub 托管的 Node.js 24、npm 11.5.1+ 与 OIDC (`id-token: write`)，不需要长期 npm write token。发布 GitHub Release 时会检查并发布 `package.json` 中的版本，因此 tag 应与版本一致，例如 `v0.1.0`。
+仓库内的 workflow 使用 GitHub 托管的 Node.js 24、npm 11.5.1+ 与 OIDC (`id-token: write`)，不需要长期 npm write token。发布 GitHub Release 时会检查并发布 `package.json` 中的版本；如果相同版本已经存在，则安全跳过 npm publish。tag 应与版本一致，例如 `v0.1.0`。
 
 参考 npm [Trusted publishing 文档](https://docs.npmjs.com/trusted-publishers/)。
 

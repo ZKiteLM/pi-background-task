@@ -27,4 +27,17 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run test:integration
-      - run: npm publish
+      - name: Check whether this version is already published
+        id: npm-version
+        shell: bash
+        run: |
+          package_spec=$(node -p "const p=require('./package.json'); p.name+'@'+p.version")
+          if npm view "$package_spec" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "$package_spec is already published; skipping npm publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish package
+        if: steps.npm-version.outputs.exists != 'true'
+        run: npm publish
