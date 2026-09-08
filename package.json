@@ -52,7 +52,7 @@
     "check": "npm run typecheck && npm test && npm run build",
     "check:release-metadata": "node scripts/check-release-metadata.mjs",
     "release:check": "npm run check && npm pack --dry-run",
-    "prepublishOnly": "npm run check:release-metadata && npm run check",
+    "prepublishOnly": "npm run check && npm run check:release-metadata",
     "prepack": "npm run build"
   },
   "pi": {

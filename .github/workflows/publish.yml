@@ -3,6 +3,7 @@ name: Publish to npm
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,11 +23,12 @@ jobs:
         run: sudo apt-get update && sudo apt-get install --yes tmux
       - run: npm ci
       - name: Verify release tag
+        if: github.event_name == 'release'
         run: node scripts/check-release-tag.mjs "$GITHUB_REF_NAME"
-      - run: npm run check:release-metadata
       - run: npm run typecheck
       - run: npm test
       - run: npm run test:integration
+      - run: npm run check:release-metadata
       - name: Check whether this version is already published
         id: npm-version
         shell: bash

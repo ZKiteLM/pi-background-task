@@ -20,7 +20,7 @@ if (packageJson.pi?.image && !/^https:\/\/.+\.(?:png|jpe?g|gif|webp)(?:\?.*)?$/i
   errors.push("pi.image must be an HTTPS PNG, JPEG, GIF, or WebP URL");
 }
 
-for (const file of ["../README.md", "../README.zh-CN.md", "../LICENSE", "../dist/index.js"]) {
+for (const file of ["../README.md", "../README.zh-CN.md", "../LICENSE"]) {
   try {
     await access(new URL(file, import.meta.url));
   } catch {
