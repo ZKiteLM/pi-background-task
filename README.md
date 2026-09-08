@@ -2,11 +2,9 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-Reliable, interactive background jobs for the [Pi coding agent](https://pi.dev/).
+Reliable, interactive background jobs for the [Pi coding agent](https://pi.dev/). `pi-background-task` gives Pi six focused tools to start long-running commands, inspect bounded logs, send terminal input, wait without model polling, and stop jobs. Every task runs in a real tmux PTY with durable output and completion wake-ups, so Pi can keep reasoning while work continues in the background.
 
-`pi-background-task` lets Pi start a long-running command and keep reasoning immediately. The job runs in a real tmux PTY, remains interactive, writes a complete durable log, and can wake the agent when it finishes—without spending model turns on polling.
-
-> **Release status:** `0.1.0` is prepared for its first public release. Before publishing, replace the repository and gallery-media placeholders described in the [release guide](docs/releasing.md).
+The extension is intentionally lightweight and easy to audit: its TypeScript modules have narrow responsibilities, it uses only Node.js standard-library code at runtime apart from Pi's peer packages, and it never interpolates user commands into tmux control commands. Background-task visibility follows Pi's session tree, allowing `/resume`, `/fork`, `/new`, and branch switching without mixing unrelated task histories or unnecessarily stopping live work.
 
 ## Why use it?
 
@@ -19,23 +17,11 @@ Reliable, interactive background jobs for the [Pi coding agent](https://pi.dev/)
 - **Small runtime footprint** — no third-party runtime dependencies beyond Pi's peer packages and the system `tmux` executable.
 - **Compact live TUI** — `/bg-tasks` updates status and elapsed time automatically and shows highlighted command/output details on demand.
 
-## Gallery and screenshots
+## In action
 
-<!--
-Before release, add:
-1. docs/assets/screenshots/task-list.png       — collapsed live task list
-2. docs/assets/screenshots/task-details.png    — expanded command/output view
-3. docs/assets/gallery-preview.png             — Pi gallery image fallback
-4. docs/assets/demo.mp4                         — Pi gallery demo video (MP4)
-Then uncomment the image row and keep package.json pi.video/pi.image URLs in sync.
--->
+Pi can coordinate multiple jobs with `task_start`, `task_wait`, and `task_logs` while keeping each tool result compact:
 
-| Live task dashboard | Interactive task details |
-| --- | --- |
-| _Screenshot placeholder: `docs/assets/screenshots/task-list.png`_ | _Screenshot placeholder: `docs/assets/screenshots/task-details.png`_ |
-| <!-- ![Live task dashboard](docs/assets/screenshots/task-list.png) --> | <!-- ![Interactive task details](docs/assets/screenshots/task-details.png) --> |
-
-The npm manifest reserves `pi.video` and `pi.image`, the media fields used by the Pi package gallery. Pi prefers the MP4 video when both are present.
+![Pi using background-task tools](docs/assets/screenshots/using-bg-tools.png)
 
 ## Requirements
 
@@ -54,37 +40,13 @@ sudo apt-get install tmux
 
 ## Install
 
-After the first npm release:
-
 ```bash
 pi install npm:pi-background-task
 ```
 
-For local development or an unpublished checkout:
+## Agent tools
 
-```bash
-npm install
-npm run build
-pi -e .
-```
-
-## A first task
-
-Ask Pi naturally:
-
-```text
-Start `npm test` as a background task. Tell me its task ID, keep working,
-and wait for it only when the other work is finished.
-```
-
-Or ask for an interactive process:
-
-```text
-Start a Python REPL in the background, send `print(sum(range(100)))`,
-then show me the new output.
-```
-
-Pi receives six tools:
+The extension provides Pi with six tools:
 
 | Tool | Purpose |
 | --- | --- |
@@ -126,6 +88,40 @@ Use the returned `nextOffset` for the next page. A single read is capped at 64 K
 - `/bg-clear` confirms and deletes completed records visible on the current branch, including resumed history.
 
 In the task panel, use `↑/↓` to select, `Enter` to expand, `r` to force a refresh, and `q` or `Esc` to close. Normal updates are event-driven; elapsed time and an expanded log tail update once per second without invoking the model.
+
+![Background task list and expanded details](docs/assets/screenshots/bg-tasks.png)
+
+## Try it
+
+### Start two parallel tasks
+
+```text
+Create two background tasks, each running for a random duration of 10–20 seconds and printing the current time every second. The first task should calculate the sum of the last digit of each timestamp. The second task should calculate the bitwise XOR of the last digit of each timestamp.
+```
+
+### Start two tasks and wait for all results
+
+```text
+Create two background tasks, each running for a random duration of 10–20 seconds and printing the current time every second. The first task should calculate the sum of the last digit of each timestamp. The second task should calculate the bitwise XOR of the last digit of each timestamp. Report the result until all tasks finish.
+```
+
+### Interact with a waiting task
+
+```text
+Create a background task that waits for user input and then prints the input.
+```
+
+While it is waiting, try either:
+
+```text
+Input: Ming
+```
+
+or:
+
+```text
+Kill this background task.
+```
 
 ## How it works
 
@@ -172,22 +168,6 @@ Each project stores private task state under:
 Runtime IDs, tmux sockets, and internal session names enforce ownership and isolation; ordinary use only needs the job name and `bg_...` task ID. Keep `.pi/background-tasks/` out of version control.
 
 Commands run with the same operating-system permissions as Pi. This extension is an execution coordinator, not a sandbox. Avoid placing secrets in command arguments or logs.
-
-## Development
-
-```bash
-npm ci
-npm run typecheck
-npm test
-npm run test:integration
-npm pack --dry-run
-```
-
-The integration suite requires tmux. CI runs the supported checks on Linux; TypeScript sources and built ESM output are both included in the npm package.
-
-## Publishing
-
-The repository includes CI and an npm Trusted Publishing workflow. Follow the [release guide](docs/releasing.md) to replace publisher placeholders, create the GitHub repository, perform the first npm publication, connect the trusted publisher, and verify Pi gallery discovery.
 
 ## License
 

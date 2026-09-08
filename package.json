@@ -26,11 +26,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_GITHUB_USERNAME/pi-background-task.git"
+    "url": "git+https://github.com/ZKiteLM/pi-background-task.git"
   },
-  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/pi-background-task#readme",
+  "homepage": "https://github.com/ZKiteLM/pi-background-task#readme",
   "bugs": {
-    "url": "https://github.com/YOUR_GITHUB_USERNAME/pi-background-task/issues"
+    "url": "https://github.com/ZKiteLM/pi-background-task/issues"
   },
   "files": [
     "dist",
@@ -59,8 +59,7 @@
     "extensions": [
       "./dist/index.js"
     ],
-    "video": "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pi-background-task/main/docs/assets/demo.mp4",
-    "image": "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pi-background-task/main/docs/assets/gallery-preview.png"
+    "video": "https://github.com/ZKiteLM/pi-background-task/releases/download/v0.1.0/pi-background-task-demo.mp4"
   },
   "peerDependencies": {
     "@earendil-works/pi-ai": "*",

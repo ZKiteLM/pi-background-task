@@ -5,5 +5,6 @@ dist/
 coverage/
 .env
 .env.*
+docs/assets/demo.mp4
 *.tgz
 .DS_Store

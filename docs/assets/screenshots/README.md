@@ -1,8 +1,6 @@
-# Screenshot placeholders
+# README screenshots
 
-Replace this note with the final media before release:
+The README uses:
 
-- `task-list.png`: compact `/bg-tasks` list at a representative terminal width.
-- `task-details.png`: expanded task showing the highlighted Command and Latest output regions.
-
-After adding both files, uncomment the screenshot row in `README.md` and `README.zh-CN.md`.
+- `using-bg-tools.png`: Pi coordinating tasks through `task_start`, `task_wait`, and `task_logs`.
+- `bg-tasks.png`: `/bg-tasks` showing the task list and expanded Command, Cwd, Log, and Latest output fields.

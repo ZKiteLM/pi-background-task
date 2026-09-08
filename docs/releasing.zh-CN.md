@@ -6,7 +6,7 @@
 
 ## 1. 替换占位符
 
-把 `package.json` 中所有 `YOUR_GITHUB_USERNAME` 替换为准确的 GitHub owner。为了生成 npm provenance，`repository.url` 必须与公开 GitHub 仓库完全一致。
+仓库元数据已经配置为 `ZKiteLM/pi-background-task`。为了生成 npm provenance，`repository.url` 必须继续与公开 GitHub 仓库完全一致。
 
 发布前确认：npm 包名 `pi-background-task`、GitHub 仓库 `<owner>/pi-background-task`、author `liming`、license MIT。准备仓库时 npm 包名尚未被占用；首次发布前请再次运行：
 
@@ -20,9 +20,9 @@ npm view pi-background-task
 
 Pi 会发现 npm 上带 `pi-package` keyword 的包。本项目已经包含该 keyword 和 `pi.extensions` 编译入口。
 
-`package.json` 还预留了 `pi.video` 与 `pi.image`：视频必须是 MP4，图片可以是 PNG、JPEG、GIF 或 WebP；两者同时存在时优先展示视频。请使用长期有效的公开 HTTPS URL。
+`package.json` 已配置 `pi.video`；视频必须是 MP4，并使用长期有效的公开 HTTPS URL。
 
-添加 `docs/assets/demo.mp4`、`docs/assets/gallery-preview.png` 和 README 中列出的两张截图，然后替换媒体 URL 中的 owner 并取消 README 图片行注释。
+视频以 `pi-background-task-demo.mp4` 上传到 `v0.1.0` GitHub 草稿 Release，不进入 Git 历史。README 截图保留在源码仓库，但不会进入 npm tarball。
 
 官方资料：[Pi packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md)、[Pi package gallery](https://pi.dev/packages)。
 
@@ -81,6 +81,6 @@ npm view pi-background-task version keywords pi
 pi install npm:pi-background-task
 ```
 
-在 [pi.dev/packages](https://pi.dev/packages) 搜索 `pi-background-task`。Gallery 由 Pi 维护，索引可能不会瞬间完成；它要求的可发现信号是已发布包中的 `pi-package` keyword。确认视频可以播放，图片可以作为回退预览。
+在 [pi.dev/packages](https://pi.dev/packages) 搜索 `pi-background-task`。Gallery 由 Pi 维护，索引可能不会瞬间完成；它要求的可发现信号是已发布包中的 `pi-package` keyword。确认视频可以正常播放。
 
 最后，把 changelog 中 `0.1.0` 的 “Unreleased” 改成实际发布日期。

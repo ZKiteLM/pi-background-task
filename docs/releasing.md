@@ -6,7 +6,7 @@ This project is prepared for GitHub, npm, and the Pi package gallery, but publis
 
 ## 1. Replace placeholders
 
-Replace every `YOUR_GITHUB_USERNAME` in `package.json` with the exact GitHub owner. The `repository.url` must exactly match the public repository for npm provenance.
+Repository metadata is configured for `ZKiteLM/pi-background-task`. The `repository.url` must continue to exactly match the public repository for npm provenance.
 
 Confirm these identity choices before publishing:
 
@@ -27,23 +27,20 @@ An `E404` means no public package currently occupies that name.
 
 Pi discovers npm packages tagged with the `pi-package` keyword. This manifest includes that keyword and a compiled entry in `pi.extensions`.
 
-The Pi gallery also reads optional media under `pi`:
+The Pi gallery also reads optional media under `pi`. This project provides a video:
 
 ```json
 {
   "pi": {
-    "video": "https://.../demo.mp4",
-    "image": "https://.../gallery-preview.png"
+    "video": "https://github.com/ZKiteLM/pi-background-task/releases/download/v0.1.0/pi-background-task-demo.mp4"
   }
 }
 ```
 
 - `video` must be MP4.
-- `image` may be PNG, JPEG, GIF, or WebP.
-- Video takes precedence when both fields exist.
-- Use durable public HTTPS URLs. Raw files in the public GitHub repository are suitable.
+- Use a durable public HTTPS URL. GitHub Release assets avoid placing large media in Git history.
 
-Add `docs/assets/demo.mp4` and `docs/assets/gallery-preview.png`, then replace the placeholder owner in both URLs. Add the two README screenshots and uncomment their Markdown rows as well.
+The video is uploaded as `pi-background-task-demo.mp4` on the draft `v0.1.0` GitHub Release and is not tracked in Git. README screenshots remain in the source repository but are excluded from the npm tarball.
 
 Official references: [Pi packages](https://github.com/earendil-works/pi/blob/main/packages/coding-agent/docs/packages.md) and [Pi package gallery](https://pi.dev/packages).
 
@@ -109,6 +106,6 @@ npm view pi-background-task version keywords pi
 pi install npm:pi-background-task
 ```
 
-Open [pi.dev/packages](https://pi.dev/packages) and search for `pi-background-task`. Gallery indexing is controlled by Pi and may not be instantaneous; the required discoverability signal is the published `pi-package` keyword. Confirm that the video plays and that the image is a valid fallback.
+Open [pi.dev/packages](https://pi.dev/packages) and search for `pi-background-task`. Gallery indexing is controlled by Pi and may not be instantaneous; the required discoverability signal is the published `pi-package` keyword. Confirm that the video plays in the gallery.
 
 Finally, move the `0.1.0` changelog entry from “Unreleased” to the release date.

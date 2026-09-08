@@ -1,8 +1,5 @@
-# Pi gallery media placeholders
+# Pi gallery media
 
-Add these files before release:
+The Pi package gallery demo is stored as the `pi-background-task-demo.mp4` asset on GitHub Release `v0.1.0`. It is not tracked in Git or included in the npm package, so source clones and installations stay lightweight.
 
-- `demo.mp4`: short Pi gallery demo video. MP4 is required.
-- `gallery-preview.png`: static gallery fallback image.
-
-Update `pi.video` and `pi.image` in `package.json` to public HTTPS URLs containing the final GitHub owner. The release metadata check blocks npm publication while the owner placeholder remains.
+`pi.video` in `package.json` points to the stable GitHub Release download URL.
