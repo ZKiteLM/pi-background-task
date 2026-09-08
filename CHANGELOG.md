@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented here.
 
+## 0.1.1 - 2026-09-08
+
+### Fixed
+
+- Include the README screenshots in the npm tarball so Pi Gallery and jsDelivr can render them.
+- Keep TypeScript source in GitHub while publishing only the compiled runtime and declarations to npm.
+
 ## 0.1.0 - 2026-09-08
 
 ### Added

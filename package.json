@@ -1,6 +1,6 @@
 {
   "name": "pi-background-task",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reliable, interactive tmux background tasks for the Pi coding agent",
   "type": "module",
   "main": "./dist/index.js",
@@ -34,10 +34,10 @@
   },
   "files": [
     "dist",
-    "src",
     "docs/**/*.md",
     "docs/assets/architecture.drawio",
     "docs/assets/architecture.png",
+    "docs/assets/screenshots/*.png",
     "README.md",
     "README.zh-CN.md",
     "CHANGELOG.md",
