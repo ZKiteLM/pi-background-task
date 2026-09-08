@@ -1,0 +1,92 @@
+{
+  "name": "pi-background-task",
+  "version": "0.1.0",
+  "description": "Reliable, interactive tmux background tasks for the Pi coding agent",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "keywords": [
+    "pi-package",
+    "pi-agent",
+    "pi-coding-agent",
+    "background-task",
+    "background-jobs",
+    "tmux",
+    "terminal",
+    "pty",
+    "agent-tools"
+  ],
+  "author": "liming",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_GITHUB_USERNAME/pi-background-task.git"
+  },
+  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/pi-background-task#readme",
+  "bugs": {
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/pi-background-task/issues"
+  },
+  "files": [
+    "dist",
+    "src",
+    "docs/**/*.md",
+    "docs/assets/architecture.drawio",
+    "docs/assets/architecture.png",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "node -e \"import('node:fs').then(fs => fs.rmSync('dist', { recursive: true, force: true }))\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test test/**/*.test.ts",
+    "test:integration": "npm run build && PI_BG_INTEGRATION=1 node --import tsx --test test/integration/**/*.test.ts",
+    "check": "npm run typecheck && npm test && npm run build",
+    "check:release-metadata": "node scripts/check-release-metadata.mjs",
+    "release:check": "npm run check && npm pack --dry-run",
+    "prepublishOnly": "npm run check:release-metadata && npm run check",
+    "prepack": "npm run build"
+  },
+  "pi": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "video": "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pi-background-task/main/docs/assets/demo.mp4",
+    "image": "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pi-background-task/main/docs/assets/gallery-preview.png"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "0.85.1",
+    "@earendil-works/pi-coding-agent": "0.85.1",
+    "@earendil-works/pi-tui": "0.85.1",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typebox": "1.3.7",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "packageManager": "npm@11.6.2"
+}
